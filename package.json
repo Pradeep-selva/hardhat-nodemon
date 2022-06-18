@@ -1,7 +1,7 @@
 {
   "name": "hardhat-nodemon",
-  "version": "1.0.0",
-  "description": "A Nodemon type experience for hardhat",
+  "version": "1.0.1",
+  "description": "A Nodemon kind of experience for hardhat",
   "main": "dist/main/index.js",
   "types": "dist/main/index.d.ts",
   "repository": "https://github.com/Pradeep-selva/hardhat-nodemon.git",

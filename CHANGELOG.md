@@ -5,3 +5,10 @@
 - Compile watch
 - Tests watch
 - Extended hardhat config for state
+
+# [1.0.1]
+
+## Minor Fix
+
+- Description fix
+- README fix
