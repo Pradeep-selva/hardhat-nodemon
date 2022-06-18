@@ -6,8 +6,9 @@ import {isSpecifiedChange} from "../utils/compile";
 import {CompileArgs} from "../types";
 import {startListener} from "../utils/listener";
 
-// new task: compile:watch
-task(`${TASK_COMPILE}:${command.watch}`)
+// extension task: compile
+task(TASK_COMPILE)
+  .addFlag(command.watch, "Watch changes in contract files")
   .addOptionalParam(
     flag.only,
     "A list of contracts to watch for compilation, separated by commas (with extension)",
@@ -18,11 +19,21 @@ task(`${TASK_COMPILE}:${command.watch}`)
     "A list of contracts to ignore while watching for compilation, separated by commas (with extension)",
     "",
   )
-  .setAction(async (args: CompileArgs, hre) => {
+  .setAction(async (args: CompileArgs, hre, runSuper) => {
+    if (!args.watch) {
+      if (args.only !== "" || args.except !== "")
+        console.error(
+          "flags: only, except are only to be used along with --watch",
+        );
+
+      await runSuper();
+      return;
+    }
+
     const {compileDir, noCompile} = hre.config.compileWatch;
 
     if (!noCompile) {
-      await hre.run(TASK_COMPILE);
+      await runSuper();
     }
 
     showStatus();
@@ -30,31 +41,12 @@ task(`${TASK_COMPILE}:${command.watch}`)
     await startListener(compileDir, async ({eventType, filename}) => {
       showChange(filename, eventType);
 
-      const shouldChange = isSpecifiedChange(args, filename);
+      const shouldChange =
+        isSpecifiedChange(args, filename) && filename.endsWith(".sol");
       if (shouldChange) {
-        await hre.run(`${TASK_COMPILE}`);
-      }
-
-      showStatus(!shouldChange);
-    });
-  });
-
-// extension task: compile
-task(TASK_COMPILE)
-  .addFlag(command.watch, "Watch changes in contract files")
-  .setAction(async (_, hre, runSuper) => {
-    await runSuper();
-
-    showStatus();
-
-    await startListener("./", async ({eventType, filename}) => {
-      showChange(filename, eventType);
-
-      const shouldCHange = filename.endsWith(".sol");
-      if (shouldCHange) {
         await runSuper();
       }
 
-      showStatus(!shouldCHange);
+      showStatus(!shouldChange);
     });
   });
