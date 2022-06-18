@@ -1,10 +1,12 @@
-# Hardhat Nodemon
+<h1 align="center">Hardhat Nodemon</h1>
+<div align="center">
+  <strong>A Nodemon kind of experience with hardhat.</strong>
+  <br/>
+  <p>This is a hardhat plugin that aims at providing a hassle free experience with hardhat, where you can run compile / test once, and watch for changes to recompile automatically, eliminating the manual recompilation / retesting workflow.</p>
+  <img src="./demo.gif" alt="demo"/>
+</div>
 
-A Nodemon kind of experience with hardhat.
-
-This is a hardhat plugin that aims at providing a hassle free experience with hardhat, where you can run compile / test once, and watch for changes to recompile automatically, eliminating the manual recompilation / retesting workflow.
-
-**NOTE: This requires at least Node Version >= 14.17.0**
+---
 
 ## Installation
 
@@ -22,6 +24,8 @@ This is a hardhat plugin that aims at providing a hassle free experience with ha
    - Run `yarn`
    - Run `npm link`
    - Run `npm link hardhat-nodemon` wherever you wish to use
+
+**NOTE: This requires at least Node Version >= 14.17.0**
 
 ## Usage
 
@@ -45,10 +49,14 @@ in order to extend hardhat with this plugin.
      - This accepts a string of contract names, separated by comma (,)
      - Only these contracts are watched for compilation
 
+     - eg: `npx hardhat compile watch --only "Sample.sol, Sample2.sol"`
+
      **except:**
 
      - This accepts a string of contract names, separated by comma (,)
      - Only these contracts are not watched for compilation
+
+     - eg: `npx hardhat compile watch --except "Sample.sol, Sample2.sol"`
 
    - Run `npx hardhat compile --help` for more details.
 
@@ -62,7 +70,6 @@ in order to extend hardhat with this plugin.
 
     --except           	A list of contracts to ignore while watching for compilation, separated by commas (.sol files) (default: "")
     --force            	Force compilation ignoring cache
-    --no-size-contracts	Don't size contracts after running this task, even if runOnCompile option is enabled
     --no-typechain     	Skip Typechain compilation
     --only             	A list of contracts to watch for compilation, separated by commas (.sol files) (default: "")
     --quiet            	Makes the compilation process less verbose
