@@ -12,3 +12,9 @@
 
 - Description fix
 - README fix
+
+# [1.0.2]
+
+## Minor Fix
+
+- README fix

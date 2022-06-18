@@ -9,7 +9,7 @@
 
 ## Demo
 
-![demo](./demo.gif)
+![demo](https://raw.githubusercontent.com/Pradeep-selva/hardhat-nodemon/master/demo.gif?token=GHSAT0AAAAAABJORISFY2HIOY4N7RW4G7XWYVOOOIQ)
 
 ---
 
