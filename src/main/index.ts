@@ -10,7 +10,7 @@ extendConfig(
       {
         noCompile: false,
         testDir: "test",
-        compileDir: "src",
+        compileDir: "contracts",
       },
       userConfig.compileWatch,
     );
