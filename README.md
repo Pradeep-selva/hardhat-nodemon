@@ -124,3 +124,7 @@ in order to extend hardhat with this plugin.
    ```
 
    - This can mainly be used to define compilation flow at start, directory where contracts are stored and directory where tests are stored.
+
+## License
+
+[MIT](./LICENSE)
