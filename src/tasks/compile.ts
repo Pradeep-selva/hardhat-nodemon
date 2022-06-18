@@ -11,7 +11,7 @@ task(`${TASK_COMPILE}${command.watch}`).setAction(async (_, hre) => {
 
   showWatching();
 
-  const watcher = watch(compileDir);
+  const watcher = watch(compileDir, {recursive: true});
   for await (const {filename, eventType} of watcher) {
     showChange(filename, eventType);
 

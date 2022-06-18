@@ -5,5 +5,7 @@ export const showWatching = () =>
 
 export const showChange = (fileName: string, event: string) =>
   console.log(
-    `[${chalk.yellow.bold(fileName)}] ${chalk.green(event.toUpperCase())}`,
+    `[${chalk.yellow.bold(fileName)}] ${chalk.green(
+      event === "rename" ? "MOVED" : "CHANGED",
+    )}`,
   );
