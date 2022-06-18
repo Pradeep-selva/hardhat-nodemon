@@ -2,8 +2,8 @@
   "name": "hardhat-nodemon",
   "version": "1.0.0",
   "description": "A Nodemon type experience for hardhat",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/main/index.js",
+  "types": "dist/main/index.d.ts",
   "repository": "https://github.com/Pradeep-selva/hardhat-nodemon.git",
   "author": "pradeep-selva, rahul0tripathi",
   "license": "MIT",
@@ -33,6 +33,10 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
-    "dev": "tsc -W"
+    "dev": "tsc -W",
+    "dev:build": "tsc && npm link",
+    "prepare": "npm run build",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   }
 }
