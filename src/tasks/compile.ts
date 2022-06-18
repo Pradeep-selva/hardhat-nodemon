@@ -7,13 +7,15 @@ import {isSpecifiedChange} from "../utils/compile";
 import {CompileArgs} from "../types";
 
 task(`${TASK_COMPILE}${command.watch}`)
-  .addFlag(
+  .addOptionalParam(
     "only",
     "A list of contracts to watch for compilation, separated by commas (with extension)",
+    "",
   )
-  .addFlag(
+  .addOptionalParam(
     "except",
     "A list of contracts to ignore while watching for compilation, separated by commas (with extension)",
+    "",
   )
   .setAction(async (args: CompileArgs, hre) => {
     const {compileDir, noCompile} = hre.config.compileWatch;
