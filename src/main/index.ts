@@ -8,12 +8,9 @@ extendConfig(
   (config: HardhatConfig, userConfig: Readonly<HardhatUserConfig>) => {
     config.compileWatch = Object.assign(
       {
-        alphaSort: false,
-        disambiguatePaths: false,
-        runOnCompile: false,
-        strict: false,
-        only: [],
-        except: [],
+        noCompile: false,
+        testDir: "test",
+        compileDir: "src",
       },
       userConfig.compileWatch,
     );
