@@ -6,7 +6,7 @@ import {isSpecifiedChange} from "../utils/compile";
 import {CompileArgs} from "../types";
 import {startListener} from "../utils/listener";
 
-task(`${TASK_COMPILE}${command.watch}`)
+task(`${TASK_COMPILE}:${command.watch}`)
   .addOptionalParam(
     flag.only,
     "A list of contracts to watch for compilation, separated by commas (with extension)",

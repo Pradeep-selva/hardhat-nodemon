@@ -1,3 +1,3 @@
 export default {
-  watch: ":watch",
+  watch: "watch",
 };
