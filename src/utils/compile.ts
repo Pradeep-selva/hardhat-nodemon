@@ -1,8 +1,10 @@
 import {CompileArgs} from "../types";
 
 export const isSpecifiedChange = (args: CompileArgs, fileName: string) => {
-  const only = args.only.split(",").map((it) => it.trim());
-  const except = args.except.split(",").map((it) => it.trim());
+  const only =
+    args.only !== "" ? args.only.split(",").map((it) => it.trim()) : [];
+  const except =
+    args.except !== "" ? args.except.split(",").map((it) => it.trim()) : [];
 
   return (
     (!only.length ||
