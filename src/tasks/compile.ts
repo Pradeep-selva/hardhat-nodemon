@@ -5,6 +5,7 @@ import {showChange, showStatus} from "../utils";
 import {isSpecifiedChange} from "../utils/compile";
 import {CompileArgs} from "../types";
 import {startListener} from "../utils/listener";
+import chalk from "chalk";
 
 // extension task: compile
 task(TASK_COMPILE)
@@ -21,10 +22,14 @@ task(TASK_COMPILE)
   )
   .setAction(async (args: CompileArgs, hre, runSuper) => {
     if (!args.watch) {
-      if (args.only !== "" || args.except !== "")
+      if (args.only !== "" || args.except !== "") {
         console.error(
-          "flags: only, except are only to be used along with --watch",
+          chalk.red.bold(
+            "flags: only, except are only to be used along with --watch",
+          ),
         );
+        return;
+      }
 
       await runSuper();
       return;
