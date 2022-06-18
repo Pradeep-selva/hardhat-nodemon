@@ -2,7 +2,7 @@ import {watch} from "fs/promises";
 import {task} from "hardhat/config";
 import {TASK_COMPILE} from "hardhat/builtin-tasks/task-names";
 import {command} from "../config";
-import {showChange, showWatching} from "../utils";
+import {showChange, showStatus} from "../utils";
 import {isSpecifiedChange} from "../utils/compile";
 import {CompileArgs} from "../types";
 
@@ -24,16 +24,17 @@ task(`${TASK_COMPILE}${command.watch}`)
       await hre.run(TASK_COMPILE);
     }
 
-    showWatching();
+    showStatus();
 
     const watcher = watch(compileDir, {recursive: true});
     for await (const {filename, eventType} of watcher) {
       showChange(filename, eventType);
 
-      if (isSpecifiedChange(args, filename)) {
+      const shouldChange = isSpecifiedChange(args, filename);
+      if (shouldChange) {
         await hre.run(`${TASK_COMPILE}`);
       }
 
-      showWatching();
+      showStatus(!shouldChange);
     }
   });

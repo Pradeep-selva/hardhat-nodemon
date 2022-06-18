@@ -1,7 +1,9 @@
 import chalk from "chalk";
 
-export const showWatching = () =>
-  console.log(chalk.green.bold("\n[Watching for contract changes...]\n"));
+export const showStatus = (skip: boolean = false) =>
+  skip
+    ? console.log(chalk.blue.bold("-- Skipping compilation for this --"))
+    : console.log(chalk.green.bold("\n[Watching for contract changes...]\n"));
 
 export const showChange = (fileName: string, event: string) =>
   console.log(
