@@ -2,7 +2,7 @@ import {task} from "hardhat/config";
 import {TASK_COMPILE} from "hardhat/builtin-tasks/task-names";
 import {command, flag} from "../config";
 import {showChange, showStatus} from "../utils";
-import {isSpecifiedChange} from "../utils/compile";
+import {isSpecifiedChange, validateArgs} from "../utils/compile";
 import {CompileArgs} from "../types";
 import {startListener} from "../utils/listener";
 import chalk from "chalk";
@@ -12,12 +12,12 @@ task(TASK_COMPILE)
   .addFlag(command.watch, "Watch changes in contract files")
   .addOptionalParam(
     flag.only,
-    "A list of contracts to watch for compilation, separated by commas (with extension)",
+    "A list of contracts to watch for compilation, separated by commas (.sol files)",
     "",
   )
   .addOptionalParam(
     flag.except,
-    "A list of contracts to ignore while watching for compilation, separated by commas (with extension)",
+    "A list of contracts to ignore while watching for compilation, separated by commas (.sol files)",
     "",
   )
   .setAction(async (args: CompileArgs, hre, runSuper) => {
@@ -32,6 +32,14 @@ task(TASK_COMPILE)
       }
 
       await runSuper();
+      return;
+    }
+
+    if (!validateArgs(args)) {
+      console.error(
+        chalk.red.bold("Please run --"),
+        chalk.bgYellow.black.bold("npx hardhat compile --help"),
+      );
       return;
     }
 
