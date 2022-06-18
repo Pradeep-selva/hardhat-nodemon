@@ -5,6 +5,7 @@ import {command} from "../config";
 import {showChange, showStatus} from "../utils";
 import {isSpecifiedChange} from "../utils/compile";
 import {CompileArgs} from "../types";
+import {startListener} from "../utils/listener";
 
 task(`${TASK_COMPILE}${command.watch}`)
   .addOptionalParam(
@@ -26,8 +27,7 @@ task(`${TASK_COMPILE}${command.watch}`)
 
     showStatus();
 
-    const watcher = watch(compileDir, {recursive: true});
-    for await (const {filename, eventType} of watcher) {
+    await startListener(compileDir, async ({eventType, filename}) => {
       showChange(filename, eventType);
 
       const shouldChange = isSpecifiedChange(args, filename);
@@ -36,5 +36,5 @@ task(`${TASK_COMPILE}${command.watch}`)
       }
 
       showStatus(!shouldChange);
-    }
+    });
   });
