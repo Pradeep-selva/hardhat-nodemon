@@ -4,6 +4,8 @@ A Nodemon kind of experience with hardhat.
 
 This is a hardhat plugin that aims at providing a hassle free experience with hardhat, where you can run compile / test once, and watch for changes to recompile automatically, eliminating the manual recompilation / retesting workflow.
 
+**NOTE: This requires at least Node Version >= 14.17.0**
+
 ## Installation
 
 1. To install via npm, use --
