@@ -3,6 +3,8 @@ import {task} from "hardhat/config";
 import {TASK_COMPILE} from "hardhat/builtin-tasks/task-names";
 import {command} from "../config";
 import {showChange, showWatching} from "../utils";
+import {isSpecifiedChange} from "../utils/compile";
+import {CompileArgs} from "../types";
 
 task(`${TASK_COMPILE}${command.watch}`)
   .addFlag(
@@ -13,7 +15,7 @@ task(`${TASK_COMPILE}${command.watch}`)
     "except",
     "A list of contracts to ignore while watching for compilation, separated by commas (with extension)",
   )
-  .setAction(async (_, hre) => {
+  .setAction(async (args: CompileArgs, hre) => {
     const {compileDir, noCompile} = hre.config.compileWatch;
 
     if (!noCompile) {
@@ -26,7 +28,9 @@ task(`${TASK_COMPILE}${command.watch}`)
     for await (const {filename, eventType} of watcher) {
       showChange(filename, eventType);
 
-      await hre.run(`${TASK_COMPILE}`);
+      if (isSpecifiedChange(args, filename)) {
+        await hre.run(`${TASK_COMPILE}`);
+      }
 
       showWatching();
     }
