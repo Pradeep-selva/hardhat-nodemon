@@ -6,6 +6,7 @@ import {isSpecifiedChange} from "../utils/compile";
 import {CompileArgs} from "../types";
 import {startListener} from "../utils/listener";
 
+// new task: compile:watch
 task(`${TASK_COMPILE}:${command.watch}`)
   .addOptionalParam(
     flag.only,
@@ -35,5 +36,25 @@ task(`${TASK_COMPILE}:${command.watch}`)
       }
 
       showStatus(!shouldChange);
+    });
+  });
+
+// extension task: compile
+task(TASK_COMPILE)
+  .addFlag(command.watch, "Watch changes in contract files")
+  .setAction(async (_, hre, runSuper) => {
+    await runSuper();
+
+    showStatus();
+
+    await startListener("./", async ({eventType, filename}) => {
+      showChange(filename, eventType);
+
+      const shouldCHange = filename.endsWith(".sol");
+      if (shouldCHange) {
+        await runSuper();
+      }
+
+      showStatus(!shouldCHange);
     });
   });

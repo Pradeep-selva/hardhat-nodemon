@@ -5,6 +5,7 @@ import {TestArgs} from "../types/test";
 import {showChange, showStatus} from "../utils";
 import {startListener} from "../utils/listener";
 
+// extension task: test
 task(TASK_TEST)
   .addFlag(
     command.watch,
