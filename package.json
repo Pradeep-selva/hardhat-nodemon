@@ -39,5 +39,21 @@
     "prepare": "npm run build",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
-  }
+  },
+  "keywords": [
+    "npm",
+    "typescript",
+    "ethereum",
+    "smart-contracts",
+    "watch",
+    "npm-package",
+    "nodemon",
+    "solidity",
+    "evm",
+    "hound",
+    "hardhat",
+    "ganache",
+    "hardhat-plugin",
+    "hevm"
+  ]
 }
