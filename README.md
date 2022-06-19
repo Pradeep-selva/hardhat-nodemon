@@ -37,7 +37,7 @@
 After installation, add the following line to your `hardhat.config.ts` --
 
 ```
-import "hardhat-nodemon
+import "hardhat-nodemon";
 ```
 
 in order to extend hardhat with this plugin.

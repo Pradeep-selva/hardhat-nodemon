@@ -18,3 +18,9 @@
 ## Minor Fix
 
 - README fix
+
+# [1.0.3]
+
+## Minor Fix
+
+- README fix
