@@ -12,6 +12,21 @@ task(TASK_TEST)
     "Watch changes in files used in test (from testDir of config)",
   )
   .setAction(async (args: TestArgs, hre, runSuper) => {
+    if (!args.watch) {
+      if (args.only !== "" || args.except !== "") {
+        console.error(
+          chalk.red.bold(
+            "flags: only, except are only to be used along with --watch",
+          ),
+        );
+        return;
+      }
+
+      await runSuper();
+      return;
+    }
+
+
     const testFiles = args.testFiles;
     const {testDir, compileDir} = hre.config.compileWatch;
 
