@@ -13,15 +13,6 @@ task(TASK_TEST)
   )
   .setAction(async (args: TestArgs, hre, runSuper) => {
     if (!args.watch) {
-      if (args.only !== "" || args.except !== "") {
-        console.error(
-          chalk.red.bold(
-            "flags: only, except are only to be used along with --watch",
-          ),
-        );
-        return;
-      }
-
       await runSuper();
       return;
     }
