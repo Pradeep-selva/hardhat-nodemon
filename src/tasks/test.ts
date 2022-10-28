@@ -12,6 +12,12 @@ task(TASK_TEST)
     "Watch changes in files used in test (from testDir of config)",
   )
   .setAction(async (args: TestArgs, hre, runSuper) => {
+    if (!args.watch) {
+      await runSuper();
+      return;
+    }
+
+
     const testFiles = args.testFiles;
     const {testDir, compileDir} = hre.config.compileWatch;
 
