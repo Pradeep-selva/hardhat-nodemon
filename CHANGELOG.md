@@ -24,3 +24,9 @@
 ## Minor Fix
 
 - README fix
+
+# [1.1.0]
+
+## Bug Fix
+
+- Fixed ability to disable watching hardhat texts
