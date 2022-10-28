@@ -1,6 +1,6 @@
 {
   "name": "hardhat-nodemon",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A Nodemon kind of experience for hardhat",
   "main": "dist/main/index.js",
   "types": "dist/main/index.d.ts",
